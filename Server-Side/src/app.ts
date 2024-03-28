@@ -1,7 +1,7 @@
 import bodyParser from "body-parser";
 import { CustomeError } from "./commonInterfaces";
 import { Request, Response, NextFunction } from "express";
-import { userRoutes } from "./Routes";
+import { authenticationRoutes, userRoutes } from "./Routes";
 
 const express = require("express");
 const app = express();
@@ -9,6 +9,7 @@ const PORT = 5000;
 
 app.use(bodyParser.json());
 app.use(userRoutes);
+app.use(authenticationRoutes);
 
 app.use(
   (error: CustomeError, req: Request, res: Response, next: NextFunction) => {
