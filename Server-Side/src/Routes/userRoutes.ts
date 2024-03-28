@@ -1,4 +1,4 @@
-import { GetUserDetails, LoginUser, RegisterUser } from "../controllers";
+import { GetUserDetails } from "../controllers";
 import { auth } from "../middlewares";
 
 const express = require("express");
