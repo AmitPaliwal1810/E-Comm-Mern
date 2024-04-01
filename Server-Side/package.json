@@ -20,6 +20,7 @@
     "jsonwebtoken": "^9.0.2",
     "node-pg-migrate": "^6.2.2",
     "nodemon": "^3.1.0",
-    "pool": "^0.4.1"
+    "pool": "^0.4.1",
+    "ts-node": "^10.9.2"
   }
 }
