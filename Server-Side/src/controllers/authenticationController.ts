@@ -43,6 +43,7 @@ export const LoginUser = async (
   const loginQuery = `SELECT id , name , email, password FROM users WHERE email=$1`;
   try {
     const { rows } = await pool.query(loginQuery, [email]);
+    console.log({rows})
     if (rows.length === 0) {
       res.status(401).json({
         messgae: "no-user found",

@@ -8,8 +8,8 @@ const app = express();
 const PORT = 5000;
 
 app.use(bodyParser.json());
-app.use(userRoutes);
 app.use(authenticationRoutes);
+app.use(userRoutes);
 
 app.use(
   (error: CustomeError, req: Request, res: Response, next: NextFunction) => {
