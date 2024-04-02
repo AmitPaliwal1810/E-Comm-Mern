@@ -44,12 +44,14 @@ export const LoginUser = async (
   const updateSession = `INSERT INTO session (user_id) VALUES ($1) RETURNING id, created_at`
   try {
     const { rows } = await pool.query(loginQuery, [email]);
+
     if (rows.length === 0) {
       res.status(401).json({
         messgae: "no-user found",
       });
     } else {
       const respose = await pool.query(updateSession, [rows[0].id])
+
       bcrypt.compare(password, rows[0].password, (_: any, result: any) => {
         if (result) {
           const payload = {
@@ -57,6 +59,7 @@ export const LoginUser = async (
             expiryTime: 2,
             sessionId: respose.rows[0].id,
             expiryTiming: respose.rows[0].create_at
+
           };
           jwt.sign(payload, sceretKey, (err: Error, token: string) => {
             if (err) {
