@@ -41,19 +41,25 @@ export const LoginUser = async (
   const { email, password } = req.body;
   const hashPassword = bcrypt.hashSync(password, salt);
   const loginQuery = `SELECT id , name , email, password FROM users WHERE email=$1`;
+  const updateSession = `INSERT INTO session (user_id) VALUES ($1) RETURNING id, created_at`
   try {
     const { rows } = await pool.query(loginQuery, [email]);
-    console.log({rows})
+
     if (rows.length === 0) {
       res.status(401).json({
         messgae: "no-user found",
       });
     } else {
+      const respose = await pool.query(updateSession, [rows[0].id])
+
       bcrypt.compare(password, rows[0].password, (_: any, result: any) => {
         if (result) {
           const payload = {
             id: rows[0].id,
-            expiryTime: "1h",
+            expiryTime: 2,
+            sessionId: respose.rows[0].id,
+            expiryTiming: respose.rows[0].create_at
+
           };
           jwt.sign(payload, sceretKey, (err: Error, token: string) => {
             if (err) {
