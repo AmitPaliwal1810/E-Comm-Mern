@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { salt, sceretKey } from "../Utlis";
-import { pool } from "../database/config/connection";
+import { salt, sceretKey } from "../../Utlis";
+import { pool } from "../../database/config/connection";
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
