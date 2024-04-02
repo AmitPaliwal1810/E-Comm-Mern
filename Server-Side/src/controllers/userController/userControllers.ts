@@ -11,7 +11,6 @@ export const GetUserDetails = async (
 ) => {
   const { user_id } = req;
   const UserDetailsQuery = `SELECT id, name, email FROM users WHERE id=$1`;
-  console.log({ user_id });
   try {
     const { rows } = await pool.query(UserDetailsQuery, [user_id]);
     res.status(200).json({

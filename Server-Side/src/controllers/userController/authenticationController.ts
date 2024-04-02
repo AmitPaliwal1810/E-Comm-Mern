@@ -70,6 +70,7 @@ export const LoginUser = async (
             }
             res.status(200).json({
               token: token,
+              sessionId: respose.rows[0].id
             });
           });
         }
@@ -79,3 +80,21 @@ export const LoginUser = async (
     next(error);
   }
 };
+
+
+//* ================================= Logout ================================
+
+export const LogoutUser = async (req: Request, res: Response, next: NextFunction) => {
+  const { user_id, sessionId } = req.body;
+  const logoutQuery = `UPDATE session SET archived_at=$1 WHERE user_id=$2 AND id=$3`;
+
+  try {
+    await pool.query(logoutQuery, [new Date(), user_id, sessionId])
+    res.status(401).json({
+      message: 'logged out'
+    })
+  } catch (error) {
+    next(error)
+  }
+
+}
