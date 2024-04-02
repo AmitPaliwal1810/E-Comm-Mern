@@ -20,6 +20,7 @@ export const auth = async (
     if (tokenPart) {
       const decodedToken = jwt.verify(tokenPart, sceretKey);
       req.user_id = decodedToken["id"];
+      req.user_role = decodedToken["role"]
       next();
     } else {
       return res.status(401).json({

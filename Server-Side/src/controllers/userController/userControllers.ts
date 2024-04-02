@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { pool } from "../database/config/connection";
-import { ExtenedRequest } from "../commonInterfaces";
+import { pool } from "../../database/config/connection";
+import { ExtenedRequest } from "../../commonInterfaces";
 
 //* ============================================ GetUserDetails ====================================================
 

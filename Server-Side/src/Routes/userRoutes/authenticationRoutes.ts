@@ -1,4 +1,4 @@
-import { LoginUser, RegisterUser } from "../controllers";
+import { LoginUser, RegisterUser } from "../../controllers";
 
 const express = require("express");
 

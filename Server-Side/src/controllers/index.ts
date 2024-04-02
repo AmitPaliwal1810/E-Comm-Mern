@@ -1,3 +1,3 @@
 // @index('./*', f => `export * from '${f.path}'`)
-export * from "./authenticationController";
-export * from "./userControllers";
+export * from './adminController'
+export * from './userController'

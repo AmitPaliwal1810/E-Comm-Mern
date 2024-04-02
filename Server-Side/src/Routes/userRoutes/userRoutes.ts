@@ -1,5 +1,5 @@
-import { GetUserDetails } from "../controllers";
-import { auth } from "../middlewares";
+import { GetUserDetails } from "../../controllers";
+import { auth } from "../../middlewares";
 
 const express = require("express");
 
