@@ -8,3 +8,5 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1234
       - POSTGRES_DB=e-comm
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
