@@ -1,7 +1,7 @@
 import bodyParser from "body-parser";
 import { CustomeError } from "./commonInterfaces";
 import { Request, Response, NextFunction } from "express";
-import { authenticationRoutes, productOperationRoutes, userRoutes } from "./Routes";
+import { authenticationRoutes, freeRoutes, productOperationRoutes, userRoutes } from "./Routes";
 
 const express = require("express");
 const app = express();
@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 
 // unauthorized routes (don't need token)
 app.use(authenticationRoutes);
+app.use(freeRoutes)
 
 // authorized routes (need token)
 app.use(userRoutes);

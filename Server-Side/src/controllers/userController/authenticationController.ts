@@ -40,7 +40,7 @@ export const LoginUser = async (
 ) => {
   const { email, password } = req.body;
   const hashPassword = bcrypt.hashSync(password, salt);
-  const loginQuery = `SELECT id , name , email, password FROM users WHERE email=$1`;
+  const loginQuery = `SELECT id , name , email, password, role FROM users WHERE email=$1`;
   const updateSession = `INSERT INTO session (user_id) VALUES ($1) RETURNING id, created_at`
   try {
     const { rows } = await pool.query(loginQuery, [email]);
@@ -51,12 +51,12 @@ export const LoginUser = async (
       });
     } else {
       const respose = await pool.query(updateSession, [rows[0].id])
-
       bcrypt.compare(password, rows[0].password, (_: any, result: any) => {
         if (result) {
           const payload = {
             id: rows[0].id,
             expiryTime: 2,
+            role: rows[0].role,
             sessionId: respose.rows[0].id,
             expiryTiming: respose.rows[0].create_at
 
@@ -82,7 +82,7 @@ export const LoginUser = async (
 };
 
 
-//* ================================= Logout ================================
+//* ================================= Logout ============================================
 
 export const LogoutUser = async (req: Request, res: Response, next: NextFunction) => {
   const { user_id, sessionId } = req.body;
