@@ -7,6 +7,7 @@ export const getAllProducts = async (req: ExtenedRequest, res: Response, next: N
     const getProductQuery = `SELECT id, name , "desc", createAt from products LIMIT $1 OFFSET $2`;
     try {
         const { rows } = await pool.query(getProductQuery, [limit ?? 10, page ?? 0])
+
         res.status(200).json({
             products: rows
         })
@@ -40,5 +41,4 @@ export const buyProducts = async (req: ExtenedRequest, res: Response, next: Next
     } catch (error) {
         next(error)
     }
-
 }
