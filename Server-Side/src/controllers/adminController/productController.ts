@@ -18,7 +18,6 @@ const AdminUnauthorizedCheck = (user_role: string, res: Response) => {
 export const AddProduct = async (req: ExtenedRequest, res: Response, next: NextFunction) => {
     const { name, desc, price, stockcount } = req.body;
     const { user_role } = req
-    console.log({ user_role })
     const productInsertQuery = `INSERT INTO products (name,"desc",price,stock_count) VALUES ($1,$2,$3,$4) RETURNING id `
 
     try {
